@@ -43,6 +43,8 @@ public abstract class AbstractLiveRoomWatcher implements LiveRoomWatcher {
      */
     public static Consumer<Gift> DEFAULT_GIFT_HANDLER = gift -> {};
 
+    public static Consumer<String> DEFAULT_LIVE_STATE_HANDLER = gift -> {};
+
     static {
         vertx = Vertx.vertx();
     }
@@ -52,6 +54,7 @@ public abstract class AbstractLiveRoomWatcher implements LiveRoomWatcher {
     private Consumer<Like> likeHandler;
     private Consumer<Follow> followHandler;
     private Consumer<Gift> giftHandler;
+    private Consumer<String> liveStateHandler;
 
     /**
      * <p>Constructor for AbstractLiveRoomWatcher.</p>
@@ -62,6 +65,7 @@ public abstract class AbstractLiveRoomWatcher implements LiveRoomWatcher {
         likeHandler = DEFAULT_LIKE_HANDLER;
         followHandler = DEFAULT_FOLLOW_HANDLER;
         giftHandler = DEFAULT_GIFT_HANDLER;
+        liveStateHandler = DEFAULT_LIVE_STATE_HANDLER;
     }
 
     /**
@@ -113,7 +117,13 @@ public abstract class AbstractLiveRoomWatcher implements LiveRoomWatcher {
         this.giftHandler = handler;
         return this;
     }
-
+    
+    @Override
+    public LiveRoomWatcher liveStateHandler(Consumer<String> handler) {
+        Objects.requireNonNull(handler);
+        this.liveStateHandler = handler;
+        return this;
+    }
     /**
      * {@inheritDoc}
      */
@@ -154,4 +164,9 @@ public abstract class AbstractLiveRoomWatcher implements LiveRoomWatcher {
         return giftHandler;
     }
 
+    @Override
+    public Consumer<String> liveStateHandler() {
+        return liveStateHandler;
+    }
+    
 }

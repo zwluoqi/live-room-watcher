@@ -42,7 +42,8 @@ public class LiveData {
     }
 
     public static String popMessages(String liveId, String authorization) {
-        
+        System.out.println("[请求popMessages] " + liveId);
+
         List<Message> messages = new ArrayList<>();
         
         if (liveId == null || liveId.isEmpty()) {
@@ -77,6 +78,10 @@ public class LiveData {
         }
 
         return jsonMessages;
+    }
+
+    public static void RemoveLiveId(String liveId) {
+        liveData.remove(liveId);
     }
 
 //

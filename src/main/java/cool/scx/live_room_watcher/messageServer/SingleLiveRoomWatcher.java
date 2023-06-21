@@ -25,6 +25,9 @@ public class SingleLiveRoomWatcher {
         }).onGift(gift -> {
             System.out.println("[礼物] " + gift.user().nickName() + " : " + gift.name() + " x " + gift.count());
             LiveData.addMessage(this.liveId,1,"gift_send",  gift.user().nickName().replace("\n", "").replace("\r", "").replace("*",""),gift.name() + " x " + gift.count());
+        }).onLiveState(state->{
+            System.out.println("[直播间状态变化] " + state);
+//            LiveData.RemoveLiveId(this.liveId);
         });
 
         liveRoomWatcher.startWatch();

@@ -203,12 +203,14 @@ public class DouYinLiveRoomWatcher extends AbstractLiveRoomWatcher {
             c.textMessageHandler(System.out::println);
             c.exceptionHandler(e -> {
                 e.printStackTrace();
+                System.out.println("exceptionHandler重新链接 !!!");
                 startWatch();
             });
             System.out.println("连接成功 !!!");
         }).onFailure(e -> {
             //todo 这里有时会 200 待研究
             e.printStackTrace();
+            System.out.println("onFailure重新链接 !!!");
             startWatch();
         });
     }
@@ -371,12 +373,15 @@ public class DouYinLiveRoomWatcher extends AbstractLiveRoomWatcher {
                 switch (action) {
                     case FINISH, FINISH_BY_ADMIN, ROOM_FINISH_BY_SWITCH -> {
                         System.out.println("直播已结束 !!!");
+                        this.liveStateHandler().accept("OVER");
                     }
                     case RESUME -> {
                         System.out.println("RESUME");
+                        this.liveStateHandler().accept("RESUME");
                     }
                     case PAUSE -> {
                         System.out.println("暂停");
+                        this.liveStateHandler().accept("PAUSE");
                     }
                 }
             }

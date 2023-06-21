@@ -61,6 +61,10 @@ public interface LiveRoomWatcher {
         return this.giftHandler(handler);
     }
 
+    default LiveRoomWatcher onLiveState(Consumer<String> handler) {
+        return this.liveStateHandler(handler);
+    }
+    
     /**
      * 当获取到新弹幕时
      *
@@ -101,6 +105,9 @@ public interface LiveRoomWatcher {
      */
     LiveRoomWatcher giftHandler(Consumer<Gift> handler);
 
+    
+    LiveRoomWatcher liveStateHandler(Consumer<String> handler);
+
     /**
      * 获取 chatHandler
      *
@@ -136,6 +143,9 @@ public interface LiveRoomWatcher {
      */
     Consumer<Gift> giftHandler();
 
+    Consumer<String> liveStateHandler() ;
+
+
     /**
      * 获取直播源地址
      *
@@ -158,5 +168,6 @@ public interface LiveRoomWatcher {
      * 启动 监控
      */
     void startWatch();
+
 
 }
