@@ -13,8 +13,8 @@ public class Main {
             applicationWeb = new ApplicationWeb();
             applicationWeb.start();
             //test
-            SingleLiveRoomWatcher singleLiveRoomWatcher = new SingleLiveRoomWatcher();
-            singleLiveRoomWatcher.Create("196714286243");
+//            SingleLiveRoomWatcher singleLiveRoomWatcher = new SingleLiveRoomWatcher();
+//            singleLiveRoomWatcher.Create("196714286243");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
